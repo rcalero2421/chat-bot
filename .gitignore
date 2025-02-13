@@ -1,0 +1,15 @@
+# Ignorar credenciales sensibles
+.env
+firebase-service-account.json
+
+# Ignorar sesiones y caché de WhatsApp Web
+.wwebjs_auth/
+.wwebjs_cache/
+
+# Ignorar dependencias de Node.js
+node_modules/
+package-lock.json
+
+# Ignorar archivos del sistema operativo
+.DS_Store
+Thumbs.db
