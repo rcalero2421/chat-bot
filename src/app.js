@@ -74,9 +74,10 @@ const initializeBot = () => {
             );
             
         }
+        const greetingKeywords = ['hola', 'buenos días', 'buenas tardes', 'buenas noches', 'hey', 'qué tal', 'saludos', 'lever bot', 'bot', 'hola bot', 'buenas', 'hello', 'hi', 'holi', 'holis', 'holaa', 'holaaa', 'holaaa', 'holaaaa', 'holaaaaa', 'holaaaaaa', 'hello', 'hi'];
 
         // 🟢 Si el usuario inicia conversación con "Hola"
-        if (message === 'hola') {
+        if (greetingKeywords.includes(message)) {
             await client.sendMessage(chatId, "¡Hola! Soy Lever Bot 🤖, el asistente virtual del KickOff 2025 de Unilever 🚀");
             await client.sendMessage(chatId,
                 "Hoy voy a ayudarte a que confirmes tu asistencia a nuestro evento de manera segura. Te compartimos la información:\n\n" +
