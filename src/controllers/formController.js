@@ -115,7 +115,7 @@ const handleUserResponse = async (chatId, message, client) => {
             
                     await client.sendMessage(chatId, 
                         "🎉 *¡Perfecto!* Estás en nuestra lista de invitados especiales.\n\n" +
-                        "📢 Para estar al tanto de todo lo que sucederá en el evento, únete a nuestro grupo de WhatsApp: [🔗 Únete aquí](https://chat.whatsapp.com/50578890007)"
+                        "📢 Para estar al tanto de todo lo que sucederá en el evento, únete a nuestro grupo de WhatsApp: [🔗 Únete aquí](https://chat.whatsapp.com/78890007)"
                     );
             
                     await client.sendMessage(chatId, 
