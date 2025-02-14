@@ -89,9 +89,6 @@ const initializeBot = () => {
 
             await saveUserResponse(chatId, { step: 'esperando_respuesta_asistencia', timestamp: now.toISOString() });
 
-        } else if (!userData) {
-            // 🚫 Si el usuario intenta escribir sin haber usado "Hola" o "Hola, quiero ir al KickOff de Unilever"
-            return client.sendMessage(chatId, "🤖 *Para comenzar, escribe:* _Hola_ o _Hola, quiero ir al KickOff de Unilever_");
         } else if (userData.step === 'esperando_respuesta_asistencia') {
             if (message === 'sí' || message === 'si') {
                 await client.sendMessage(chatId, "¡Perfecto! 🎉 Vamos a confirmar tu asistencia.");
