@@ -74,7 +74,9 @@
 
         async function cargarInvitados() {
             try {
-                const response = await fetch('http://localhost:3000/invitados');
+                // obtener la url de la API
+                const url = window.location.href;
+                const response = await fetch(url + 'invitados');
                 const data = await response.json();
                 const tbody = document.getElementById('tabla-invitados');
 
