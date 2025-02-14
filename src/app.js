@@ -89,7 +89,19 @@ const initializeBot = () => {
 
             await saveUserResponse(chatId, { step: 'esperando_respuesta_asistencia', timestamp: now.toISOString() });
 
-        } else if (userData.step === 'esperando_respuesta_asistencia') {
+        } 
+        
+        if (!userData) {
+            console.log(`⚠️ No se encontró usuario en la base de datos para ${chatId}`);
+            return client.sendMessage(chatId, "🤖 *Para comenzar, escribe:* _Hola_ o _Hola, quiero ir al KickOff de Unilever_");
+        }
+        
+        if (!userData.step) {
+            console.log(`⚠️ userData existe, pero no tiene 'step'. Datos:`, userData);
+            return client.sendMessage(chatId, "❌ Ha ocurrido un error con tu registro. Escribe *Hola* para comenzar de nuevo.");
+        }
+        
+        if (userData.step === 'esperando_respuesta_asistencia') {
             if (message === 'sí' || message === 'si') {
                 await client.sendMessage(chatId, "¡Perfecto! 🎉 Vamos a confirmar tu asistencia.");
 
