@@ -105,9 +105,9 @@ const handleUserResponse = async (chatId, message, client) => {
         
             await client.sendMessage(chatId, 
                 "✅ ¡Formulario completado! Gracias por confirmar tu asistencia.\n\n" +
-                "‼ Es importante que te unas al grupo de WhatsApp de la convención porque ahí estaremos compartiendo todas las herramientas e información durante el evento, ¡Nos vemos el lunes! 🚀\n\n" +
+                "‼ Es importante que te unas al grupo de WhatsApp de la convención porque ahí estaremos compartiendo todas las herramientas e información durante el evento.\n\n" +
                 "👉 Únete aquí: [🔗 Grupo de WhatsApp](https://whatsapp.com/channel/0029Vb1TU376hENhwrNohC11)\n\n" + // 🔹 Se corrigió la concatenación
-                "🔔 *¡Nos vemos pronto en el evento!* 🚀"
+                "🔔 *¡Nos vemos el lunes!* 🚀"
             );
             
             // case 13:
