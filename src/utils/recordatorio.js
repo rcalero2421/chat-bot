@@ -12,7 +12,7 @@ const scheduleReminder = (client) => {
             if (user.confirmed) {
                 await client.sendMessage(user.chatId, 
                     "🔔 *Recordatorio: Smart Future 2025* 🚀\n\n" +
-                    "¡Hola! No olvides que la convención Smart Future se acerca. Nos vemos el *lunes 17 de febrero a las 8:00 AM* en *Club Terraza, Salón La Terraza*.\n\n" +
+                    "¡Hola! No olvides que la convención Smart Future se acerca. Nos vemos el *lunes 17 de febrero a las 8:15 AM* en *Club Terraza, Salón La Terraza*.\n\n" +
                     "📌 *Agenda el evento en tu calendario si aún no lo has hecho:* [📅 Agregar al calendario](https://calendly.com/evento/unilever2025)\n\n" +
                     "¡Nos vemos pronto! 🎉"
                 );
