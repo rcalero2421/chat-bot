@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 
-const { initializeBot, getQrCode  } = require('./src/app');
+const { initializeBot, getQrCode, isBotLinked  } = require('./src/app');
 const qr = require('qr-image'); // 🔹 Importar qr-image
 const { getAllUsers } = require('./src/database/database'); 
 
