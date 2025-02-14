@@ -136,7 +136,7 @@ const handleUserResponse = async (chatId, message, client) => {
             //     } else {
             //         return sendInvalidMessage(chatId, "Por favor, responde *Sí* o *No*.");
             //     }
-            //     break;
+                break;
             
 
         default:
