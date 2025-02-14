@@ -68,6 +68,8 @@ const initializeBot = () => {
                 `⏰ *Hora:* *8:00 AM - 10:00 AM (Hora Nicaragua)*\n\n` +
                 `📌 *Agéndalo en tu calendario:* \n` +
                 `[📅 *Agregar a Google Calendar*](https://www.google.com/calendar/render?action=TEMPLATE&text=KickOff+2025+Unilever&dates=20250217T140000Z/20250217T160000Z&details=Evento+de+lanzamiento+KickOff+2025&location=Club+Terraza,+Managua,+Nicaragua&sf=true&output=xml)\n\n` +
+                "‼ Es importante que te unas al grupo de WhatsApp de la convención porque ahí estaremos compartiendo todas las herramientas e información durante el evento, ¡Nos vemos el lunes! 🚀\n\n" +
+                "👉 Únete aquí: [🔗 Grupo de WhatsApp](https://chat.whatsapp.com/78890007)"
                 `🔔 *¡Nos vemos pronto en el evento!* 🚀`
             );
             
