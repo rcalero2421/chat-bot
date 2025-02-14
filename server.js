@@ -16,29 +16,42 @@ app.use(cors({ origin: '*' }));
 
 app.get('/invitados', async (req, res) => {
     try {
-        const invitados = await getAllUsers(); // Obtener la lista de invitados desde la base de datos
+        const allInvitados = await getAllUsers();
 
-        res.json({
+        if (!allInvitados || allInvitados.length === 0) {
+            return res.json({ success: true, invitados: [], message: "No hay invitados registrados aún." });
+        }
+
+        const invitados = allInvitados
+            .filter(inv => inv.completed === true) // Filtrar solo los completados
+            .map(inv => ({
+                nombre: inv.name || "No especificado",
+                correo: inv.email || "No especificado",
+                experiencia: inv.experience || "No especificado",
+                fortalezas: inv.strengths || "No especificado",
+                rol_equipo: inv.team_role || "No especificado",
+                herramientas_IA: inv.ai_tools || "No especificado",
+                interes_IA: inv.ai_interest || "No especificado",
+                aprendizaje_IA: inv.ai_learning_interest || "No especificado", // Agregado
+                resolucion_retos: inv.problem_solving || "No especificado",
+                expectativas: inv.event_expectations || "No especificado",
+                pregunta_IA: inv.ai_question || "No especificado",
+                solucion_IA: inv.ai_solution || "No especificado", // Agregado
+                confirmado: inv.confirmed ? "Sí" : "No"
+            }));
+
+        return res.json({
             success: true,
-            invitados: invitados.map(inv => ({
-                nombre: inv.name,
-                correo: inv.email,
-                experiencia: inv.experience,
-                fortalezas: inv.strengths,
-                rol_equipo: inv.team_role,
-                herramientas_IA: inv.ai_tools,
-                interes_IA: inv.ai_interest,
-                resolucion_retos: inv.problem_solving,
-                expectativas: inv.event_expectations,
-                pregunta_IA: inv.ai_question,
-                confirmado: inv.confirmed ? 'Sí' : 'No'
-            }))
+            invitados,
+            message: invitados.length > 0 ? "Lista de invitados obtenida correctamente." : "No hay invitados confirmados aún."
         });
+
     } catch (error) {
         console.error("❌ Error al obtener la lista de invitados:", error);
-        res.status(500).json({ success: false, message: "Error en el servidor." });
+        return res.status(500).json({ success: false, message: "Error en el servidor." });
     }
 });
+
 
 app.get('/qr', async (req, res) => {
     const qrCode = getQrCode(); // Obtenemos el último QR generado

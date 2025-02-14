@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Invitados - Smart Future 2025</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script> 
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,13 +12,14 @@
             margin: 20px;
         }
         table {
-            width: 90%;
+            width: 95%;
             margin: 20px auto;
             border-collapse: collapse;
         }
         th, td {
             border: 1px solid #ddd;
             padding: 8px;
+            text-align: center;
         }
         th {
             background-color: #00A8F1;
@@ -26,10 +28,23 @@
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
+        button {
+            padding: 10px 20px;
+            background-color: #00A8F1;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #007bbf;
+        }
     </style>
 </head>
 <body>
     <h1>Lista de Invitados - Smart Future 2025</h1>
+    <button onclick="descargarExcel()">📥 Descargar Excel</button>
     <table>
         <thead>
             <tr>
@@ -40,18 +55,23 @@
                 <th>Rol</th>
                 <th>IA Utilizada</th>
                 <th>Interés en IA</th>
+                <th>Aprendizaje de IA</th>
                 <th>Resolución de Retos</th>
                 <th>Expectativas</th>
                 <th>Pregunta IA</th>
+                <!-- <th>Solución IA</th> -->
                 <th>Confirmado</th>
+                <th>Completado</th>
             </tr>
         </thead>
         <tbody id="tabla-invitados">
-            <tr><td colspan="11">Cargando datos...</td></tr>
+            <tr><td colspan="14">Cargando datos...</td></tr>
         </tbody>
     </table>
 
     <script>
+        let listaInvitados = []; // Guardará los datos para descargar en Excel
+
         async function cargarInvitados() {
             try {
                 const response = await fetch('http://localhost:3000/invitados');
@@ -59,6 +79,8 @@
                 const tbody = document.getElementById('tabla-invitados');
 
                 if (data.success) {
+                    listaInvitados = data.invitados; // Guardamos la lista para exportar
+
                     tbody.innerHTML = data.invitados.map(inv => `
                         <tr>
                             <td>${inv.nombre}</td>
@@ -68,19 +90,33 @@
                             <td>${inv.rol_equipo}</td>
                             <td>${inv.herramientas_IA}</td>
                             <td>${inv.interes_IA}</td>
+                            <td>${inv.aprendizaje_IA}</td>
                             <td>${inv.resolucion_retos}</td>
                             <td>${inv.expectativas}</td>
                             <td>${inv.pregunta_IA}</td>
-                            <td>${inv.confirmado}</td>
+                            <td>${inv.confirmado ? "Sí" : "No"}</td>
+                            <td>${inv.completado ? "Sí" : "No"}</td>
                         </tr>
                     `).join('');
                 } else {
-                    tbody.innerHTML = `<tr><td colspan="11">No se pudieron cargar los datos.</td></tr>`;
+                    tbody.innerHTML = `<tr><td colspan="14">No se pudieron cargar los datos.</td></tr>`;
                 }
             } catch (error) {
                 console.error("❌ Error al cargar los invitados:", error);
-                document.getElementById('tabla-invitados').innerHTML = `<tr><td colspan="11">Error al cargar datos.</td></tr>`;
+                document.getElementById('tabla-invitados').innerHTML = `<tr><td colspan="14">Error al cargar datos.</td></tr>`;
             }
+        }
+
+        function descargarExcel() {
+            if (listaInvitados.length === 0) {
+                alert("No hay datos para exportar.");
+                return;
+            }
+
+            const ws = XLSX.utils.json_to_sheet(listaInvitados);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Invitados");
+            XLSX.writeFile(wb, "Lista_Invitados_SmartFuture2025.xlsx");
         }
 
         cargarInvitados();
