@@ -11,9 +11,8 @@ let qrCodeData = null;
 const client = new Client({
     authStrategy: new LocalAuth(),
     puppeteer: {
-        executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe', // Ruta de tu Chrome
-        headless: false, // Cambiar a false para ver si el navegador se cierra
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        headless: true // Para ejecutar sin interfaz gráfica
     }
 });
 
