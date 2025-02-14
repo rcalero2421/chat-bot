@@ -49,23 +49,19 @@
         <thead>
             <tr>
                 <th>Nombre</th>
-                <!-- <th>Correo</th> -->
                 <th>Experiencia</th>
-                <th>Fortalezas</th>
-                <th>Rol</th>
+                <th>Departamento</th>
+                <th>Rol en el Equipo</th>
                 <th>IA Utilizada</th>
                 <th>Interés en IA</th>
-                <th>Aprendizaje de IA</th>
                 <th>Resolución de Retos</th>
+                <th>Implementación de IA</th>
                 <th>Expectativas</th>
-                <!-- <th>Pregunta IA</th> -->
-                <!-- <th>Solución IA</th> -->
                 <th>Confirmado</th>
-                <th>Completado</th>
             </tr>
         </thead>
         <tbody id="tabla-invitados">
-            <tr><td colspan="14">Cargando datos...</td></tr>
+            <tr><td colspan="10">Cargando datos...</td></tr>
         </tbody>
     </table>
 
@@ -74,7 +70,7 @@
 
         async function cargarInvitados() {
             try {
-                // obtener la url de la API
+                // Obtener la URL de la API
                 const url = window.location.href;
                 const response = await fetch(url + 'invitados');
                 const data = await response.json();
@@ -87,23 +83,22 @@
                         <tr>
                             <td>${inv.nombre}</td>
                             <td>${inv.experiencia}</td>
-                            <td>${inv.fortalezas}</td>
+                            <td>${inv.departamento}</td>
                             <td>${inv.rol_equipo}</td>
                             <td>${inv.herramientas_IA}</td>
                             <td>${inv.interes_IA}</td>
-                            <td>${inv.aprendizaje_IA}</td>
                             <td>${inv.resolucion_retos}</td>
+                            <td>${inv.implementacion_IA}</td>
                             <td>${inv.expectativas}</td>
                             <td>${inv.confirmado ? "Sí" : "No"}</td>
-                            <td>${inv.completado ? "Sí" : "No"}</td>
                         </tr>
                     `).join('');
                 } else {
-                    tbody.innerHTML = `<tr><td colspan="14">No se pudieron cargar los datos.</td></tr>`;
+                    tbody.innerHTML = `<tr><td colspan="10">No se pudieron cargar los datos.</td></tr>`;
                 }
             } catch (error) {
                 console.error("❌ Error al cargar los invitados:", error);
-                document.getElementById('tabla-invitados').innerHTML = `<tr><td colspan="14">Error al cargar datos.</td></tr>`;
+                document.getElementById('tabla-invitados').innerHTML = `<tr><td colspan="10">Error al cargar datos.</td></tr>`;
             }
         }
 

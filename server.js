@@ -26,17 +26,14 @@ app.get('/invitados', async (req, res) => {
             .filter(inv => inv.completed === true) // Filtrar solo los completados
             .map(inv => ({
                 nombre: inv.name || "No especificado",
-                // correo: inv.email || "No especificado",
                 experiencia: inv.experience || "No especificado",
-                fortalezas: inv.strengths || "No especificado",
+                departamento: inv.department || "No especificado",
                 rol_equipo: inv.team_role || "No especificado",
                 herramientas_IA: inv.ai_tools || "No especificado",
                 interes_IA: inv.ai_interest || "No especificado",
-                aprendizaje_IA: inv.ai_learning_interest || "No especificado", // Agregado
                 resolucion_retos: inv.problem_solving || "No especificado",
+                implementacion_IA: inv.ai_solution || "No especificado",
                 expectativas: inv.event_expectations || "No especificado",
-                // pregunta_IA: inv.ai_question || "No especificado",
-                // solucion_IA: inv.ai_solution || "No especificado", // Agregado
                 confirmado: inv.confirmed ? "Sí" : "No"
             }));
 

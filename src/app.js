@@ -42,9 +42,11 @@ const initializeBot = () => {
         console.log(`📩 Mensaje recibido de ${msg.from}: ${msg.body}`);
 
         const chatId = msg.from;
-        const message = msg.body.toLowerCase();
+        const message = msg.body.toLowerCase().trim();
         const now = moment();
         const userData = await getUserResponse(chatId);
+
+        const greetingKeywords = ['hola', 'hola, quiero ir al kickoff de unilever'];
 
         // 🔥 Si el usuario ya completó el registro, evitar que vuelva a iniciar
         if (userData && userData.completed) {
@@ -69,13 +71,12 @@ const initializeBot = () => {
             if (minutesSinceLastInteraction > SESSION_TIMEOUT_MINUTES) {
                 console.log(`⏳ Eliminando sesión expirada para ${chatId}`);
                 await deleteUserResponse(chatId);
-                return client.sendMessage(chatId, "⏳ Tu sesión ha expirado debido a inactividad. Escribe *Formulario* para comenzar de nuevo.");
+                return client.sendMessage(chatId, "⏳ Tu sesión ha expirado debido a inactividad. Escribe *Hola* para comenzar de nuevo.");
             }
         }
 
-        const greetingKeywords = ['hola', 'buenos días', 'buenas tardes', 'buenas noches', 'hey', 'qué tal', 'saludos', 'lever bot', 'bot', 'hola bot', 'buenas', 'hello', 'hi', 'holi', 'holis'];
-
-        if (greetingKeywords.includes(message)) {
+        // ✅ Solo permitir acceso si la conversación empieza con los saludos definidos en `greetingKeywords`
+        if (greetingKeywords.some(keyword => message.includes(keyword))) {
             await client.sendMessage(chatId, "¡Hola! Soy Lever Bot 🤖, el asistente virtual del KickOff 2025 de Unilever 🚀");
             await client.sendMessage(chatId,
                 "Hoy voy a ayudarte a que confirmes tu asistencia a nuestro evento de manera segura. Te compartimos la información:\n\n" +
@@ -88,7 +89,10 @@ const initializeBot = () => {
 
             await saveUserResponse(chatId, { step: 'esperando_respuesta_asistencia', timestamp: now.toISOString() });
 
-        } else if (userData && userData.step === 'esperando_respuesta_asistencia') {
+        } else if (!userData) {
+            // 🚫 Si el usuario intenta escribir sin haber usado "Hola" o "Hola, quiero ir al KickOff de Unilever"
+            return client.sendMessage(chatId, "🤖 *Para comenzar, escribe:* _Hola_ o _Hola, quiero ir al KickOff de Unilever_");
+        } else if (userData.step === 'esperando_respuesta_asistencia') {
             if (message === 'sí' || message === 'si') {
                 await client.sendMessage(chatId, "¡Perfecto! 🎉 Vamos a confirmar tu asistencia.");
 
@@ -98,10 +102,6 @@ const initializeBot = () => {
                 await client.sendMessage(chatId, "Gracias por tu tiempo. Si cambias de opinión, puedes escribir *Hola* para registrarte. ¡Nos vemos! 👋");
                 await deleteUserResponse(chatId);
             }
-        } else if (message === 'formulario') {
-            await handleUserResponse(chatId, message, client);
-        } else {
-            await handleUserResponse(chatId, message, client);
         }
     });
 
