@@ -93,7 +93,7 @@ const handleUserResponse = async (chatId, message, client) => {
             if (selectedExpectations.length > 2 || !selectedExpectations.every(s => ["1", "2", "3", "4", "5"].includes(s))) {
                 return sendInvalidMessage(chatId, "Selecciona hasta 2 opciones válidas (1-5).");
             }
-            await saveUserResponse(chatId, { event_expectations: message, step: 11 });
+            await saveUserResponse(chatId, { event_expectations: message, step: 11 , completed: true });
             // return client.sendMessage(chatId, "1️⃣2️⃣ Si pudieras hacerle una pregunta a la IA sobre ventas, ¿cuál sería?");
 
         case 11:

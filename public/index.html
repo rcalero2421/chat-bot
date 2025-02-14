@@ -49,7 +49,7 @@
         <thead>
             <tr>
                 <th>Nombre</th>
-                <th>Correo</th>
+                <!-- <th>Correo</th> -->
                 <th>Experiencia</th>
                 <th>Fortalezas</th>
                 <th>Rol</th>
@@ -58,7 +58,7 @@
                 <th>Aprendizaje de IA</th>
                 <th>Resolución de Retos</th>
                 <th>Expectativas</th>
-                <th>Pregunta IA</th>
+                <!-- <th>Pregunta IA</th> -->
                 <!-- <th>Solución IA</th> -->
                 <th>Confirmado</th>
                 <th>Completado</th>
@@ -86,7 +86,6 @@
                     tbody.innerHTML = data.invitados.map(inv => `
                         <tr>
                             <td>${inv.nombre}</td>
-                            <td>${inv.correo}</td>
                             <td>${inv.experiencia}</td>
                             <td>${inv.fortalezas}</td>
                             <td>${inv.rol_equipo}</td>
@@ -95,7 +94,6 @@
                             <td>${inv.aprendizaje_IA}</td>
                             <td>${inv.resolucion_retos}</td>
                             <td>${inv.expectativas}</td>
-                            <td>${inv.pregunta_IA}</td>
                             <td>${inv.confirmado ? "Sí" : "No"}</td>
                             <td>${inv.completado ? "Sí" : "No"}</td>
                         </tr>
