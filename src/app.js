@@ -46,9 +46,16 @@ const initializeBot = () => {
         const chatId = msg.from;
         const message = msg.body.toLowerCase().trim();
         const now = moment();
+
+        await saveUserResponse(chatId, { 
+            timestamp: now.toISOString() 
+        });
+
+        console.log(`🟢 Usuario ${chatId} en paso: ${userData?.step || 'Nuevo usuario'}`);
+        
         const userData = await getUserResponse(chatId);
 
-        const greetingKeywords = ['hola', 'hola, quiero ir al kickoff de unilever'];
+        const greetingKeywords = ['hola', 'hi', 'hola, quiero ir al kickoff de unilever', 'hola, quiero registrarme', 'hola, quiero asistir', 'hola, quiero confirmar mi asistencia'];
 
         // 🔥 Si el usuario ya completó el registro, evitar que vuelva a iniciar
         if (userData && userData.completed) {
@@ -91,15 +98,7 @@ const initializeBot = () => {
 
             await saveUserResponse(chatId, { step: 'esperando_respuesta_asistencia', timestamp: now.toISOString() });
 
-        } else if (!userData) {
-            console.log(`⚠️ No se encontró usuario en la base de datos para ${chatId}`);
-            return client.sendMessage(chatId, "🤖 *Para comenzar, escribe:* _Hola_ o _Hola, quiero ir al KickOff de Unilever_");
-        } else if (!userData.step) {
-            console.log(`⚠️ userData existe, pero no tiene 'step'. Datos:`, userData);
-            return client.sendMessage(chatId, "❌ Ha ocurrido un error con tu registro. Escribe *Hola* para comenzar de nuevo.");
-        }
-        
-        if (userData.step === 'esperando_respuesta_asistencia') {
+        } else if (userData.step === 'esperando_respuesta_asistencia') {
             if (message === 'sí' || message === 'si') {
                 await client.sendMessage(chatId, "¡Perfecto! 🎉 Vamos a confirmar tu asistencia.");
 
