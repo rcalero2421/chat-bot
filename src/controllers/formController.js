@@ -21,7 +21,7 @@ const handleUserResponse = async (chatId, message, client) => {
                 return sendInvalidMessage(chatId, "Por favor, ingresa tu nombre.");
             }
             await saveUserResponse(chatId, { name: message, step: 2 });
-            return client.sendMessage(chatId, "3️⃣ ¿Cuántos años de experiencia tienes en ventas o consumo masivo?\n🔹 1. Menos de 1 año\n🔹 2. 1-3 años\n🔹 3. 3-5 años\n🔹 4. Más de 5 años");
+            return client.sendMessage(chatId, "2️⃣ ¿Cuántos años de experiencia tienes en ventas o consumo masivo?\n🔹 1. Menos de 1 año\n🔹 2. 1-3 años\n🔹 3. 3-5 años\n🔹 4. Más de 5 años");
             // return client.sendMessage(chatId, "2️⃣ ¿Cuál es tu *correo electrónico*?");
 
         // case 2:
@@ -36,7 +36,7 @@ const handleUserResponse = async (chatId, message, client) => {
                 return sendInvalidMessage(chatId, "Selecciona una opción válida (1, 2, 3 o 4).");
             }
             await saveUserResponse(chatId, { experience: message, step: 3 });
-            return client.sendMessage(chatId, "4️⃣ ¿En qué área se siente más fuerte? (Elija hasta 2 opciones separadas por coma)\n🔹 1. Negociación\n🔹 2. Marketing\n🔹 3. Clientes\n🔹 4. Análisis de datos\n🔹 5. Trade marketing\n🔹 6. Innovación");
+            return client.sendMessage(chatId, "3️⃣ ¿En qué área se siente más fuerte? (Elija hasta 2 opciones separadas por coma)\n🔹 1. Negociación\n🔹 2. Marketing\n🔹 3. Clientes\n🔹 4. Análisis de datos\n🔹 5. Trade marketing\n🔹 6. Innovación");
 
         case 3:
             const selectedStrengths = message.split(',').map(s => s.trim());
@@ -44,49 +44,49 @@ const handleUserResponse = async (chatId, message, client) => {
                 return sendInvalidMessage(chatId, "Selecciona hasta 2 opciones válidas (1-6).");
             }
             await saveUserResponse(chatId, { strengths: message, step: 4 });
-            return client.sendMessage(chatId, "5️⃣ ¿Cómo se describiría en un equipo de trabajo?\n🔹 1. Líder\n🔹 2. Estratega\n🔹 3. Creativo\n🔹 4. Ejecutor\n🔹 5. Colaborador");
+            return client.sendMessage(chatId, "4️⃣ ¿Cómo se describiría en un equipo de trabajo?\n🔹 1. Líder\n🔹 2. Estratega\n🔹 3. Creativo\n🔹 4. Ejecutor\n🔹 5. Colaborador");
 
         case 4:
             if (!["1", "2", "3", "4", "5"].includes(message)) {
                 return sendInvalidMessage(chatId, "Selecciona una opción válida (1-5).");
             }
             await saveUserResponse(chatId, { team_role: message, step: 5 });
-            return client.sendMessage(chatId, "6️⃣ ¿Qué herramienta de IA utilizas más?\n🔹 1. ChatGPT\n🔹 2. Automatización\n🔹 3. Análisis de datos\n🔹 4. No uso IA");
+            return client.sendMessage(chatId, "5️⃣ ¿Qué herramienta de IA utilizas más?\n🔹 1. ChatGPT\n🔹 2. Automatización\n🔹 3. Análisis de datos\n🔹 4. No uso IA");
 
         case 5:
             if (!["1", "2", "3", "4"].includes(message)) {
                 return sendInvalidMessage(chatId, "Selecciona una opción válida (1-4).");
             }
             await saveUserResponse(chatId, { ai_tools: message, step: 6 });
-            return client.sendMessage(chatId, "7️⃣ ¿Qué aspecto de la IA en ventas te emociona más?\n🔹 1. Personalización\n🔹 2. Automatización\n🔹 3. Predicción de tendencias\n🔹 4. Creación de contenido");
+            return client.sendMessage(chatId, "6️⃣ ¿Qué aspecto de la IA en ventas te emociona más?\n🔹 1. Personalización\n🔹 2. Automatización\n🔹 3. Predicción de tendencias\n🔹 4. Creación de contenido");
 
         case 6:
             if (!["1", "2", "3", "4"].includes(message)) {
                 return sendInvalidMessage(chatId, "Selecciona una opción válida (1-4).");
             }
             await saveUserResponse(chatId, { ai_interest: message, step: 7 });
-            return client.sendMessage(chatId, "8️⃣ ¿Cómo prefieres afrontar un reto?\n🔹 1. Individual\n🔹 2. En equipo\n🔹 3. Creatividad\n🔹 4. Estrategia probada");
+            return client.sendMessage(chatId, "7️⃣ ¿Cómo prefieres afrontar un reto?\n🔹 1. Individual\n🔹 2. En equipo\n🔹 3. Creatividad\n🔹 4. Estrategia probada");
 
         case 7:
             if (!["1", "2", "3", "4"].includes(message)) {
                 return sendInvalidMessage(chatId, "Selecciona una opción válida (1-4).");
             }
             await saveUserResponse(chatId, { problem_solving: message, step: 8 });
-            return client.sendMessage(chatId, "9️⃣ ¿Nivel de interés en IA para marketing?\n🔹 1. Muy alto\n🔹 2. Alto\n🔹 3. Medio\n🔹 4. Bajo");
+            return client.sendMessage(chatId, "8️⃣ ¿Nivel de interés en IA para marketing?\n🔹 1. Muy alto\n🔹 2. Alto\n🔹 3. Medio\n🔹 4. Bajo");
 
         case 8:
             if (!["1", "2", "3", "4"].includes(message)) {
                 return sendInvalidMessage(chatId, "Selecciona una opción válida (1-4).");
             }
             await saveUserResponse(chatId, { ai_learning_interest: message, step: 9 });
-            return client.sendMessage(chatId, "🔟 ¿Qué IA te gustaría implementar en tu trabajo?\n🔹 1. Chatbot\n🔹 2. Ventas predictivas\n🔹 3. Automatización\n🔹 4. Generador de contenido");
+            return client.sendMessage(chatId, "9️⃣ ¿Qué IA te gustaría implementar en tu trabajo?\n🔹 1. Chatbot\n🔹 2. Ventas predictivas\n🔹 3. Automatización\n🔹 4. Generador de contenido");
 
         case 9:
             if (!["1", "2", "3", "4"].includes(message)) {
                 return sendInvalidMessage(chatId, "Selecciona una opción válida (1-4).");
             }
             await saveUserResponse(chatId, { ai_solution: message, step: 10 });
-            return client.sendMessage(chatId, "1️⃣1️⃣ ¿Qué esperas obtener de la convención? (Máximo 2 opciones separadas por coma)\n🔹 1. Estrategias\n🔹 2. Networking\n🔹 3. Innovación\n🔹 4. Habilidades\n🔹 5. Dinámicas");
+            return client.sendMessage(chatId, "🔟 ¿Qué esperas obtener de la convención? (Máximo 2 opciones separadas por coma)\n🔹 1. Estrategias\n🔹 2. Networking\n🔹 3. Innovación\n🔹 4. Habilidades\n🔹 5. Dinámicas");
 
         case 10:
             const selectedExpectations = message.split(',').map(s => s.trim());
@@ -106,7 +106,8 @@ const handleUserResponse = async (chatId, message, client) => {
             await client.sendMessage(chatId, 
                 "✅ ¡Formulario completado! Gracias por confirmar tu asistencia.\n\n" +
                 "‼ Es importante que te unas al grupo de WhatsApp de la convención porque ahí estaremos compartiendo todas las herramientas e información durante el evento, ¡Nos vemos el lunes! 🚀\n\n" +
-                "👉 Únete aquí: [🔗 Grupo de WhatsApp](https://chat.whatsapp.com/78890007)"
+                "👉 Únete aquí: [🔗 Grupo de WhatsApp](https://whatsapp.com/channel/0029Vb1TU376hENhwrNohC11)\n\n" + // 🔹 Se corrigió la concatenación
+                "🔔 *¡Nos vemos pronto en el evento!* 🚀"
             );
             
             // case 13:

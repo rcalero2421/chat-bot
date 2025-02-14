@@ -1,9 +1,9 @@
 const cron = require('node-cron');
 const { Client } = require('whatsapp-web.js');
-const { getAllUsers } = require('../database/database'); // Asegúrate de que esta función existe
+const { getAllUsers } = require('../database/database'); 
 
 const scheduleReminder = (client) => {
-    cron.schedule('0 9 * * 6', async () => {  // Sábado a las 9:00 AM
+    cron.schedule('0 17 * * 6', async () => {  // ✅ Sábado a las 5:00 PM
         console.log("📢 Enviando recordatorio del evento...");
 
         const users = await getAllUsers();
@@ -21,7 +21,7 @@ const scheduleReminder = (client) => {
 
         console.log("✅ Recordatorios enviados.");
     }, {
-        timezone: "America/Managua"
+        timezone: "America/Managua" // ✅ Asegura que se use la zona horaria correcta
     });
 };
 
