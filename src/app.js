@@ -103,6 +103,10 @@ const initializeBot = () => {
                 await deleteUserResponse(chatId);
             }
         }
+        else if (userData.step >= 1) {
+            console.log(`⚡ Enviando mensaje a handleUserResponse para ${chatId}, en paso: ${userData.step}`);
+            await handleUserResponse(chatId, message, client);
+        }
     });
 
     client.initialize();

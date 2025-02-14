@@ -3,6 +3,9 @@ const { saveUserResponse, getUserResponse } = require('../database/database');
 const handleUserResponse = async (chatId, message, client) => {
     let userData = await getUserResponse(chatId);
 
+    console.log(`🟢 Usuario ${chatId} en paso: ${userData?.step || 'Nuevo usuario'}`);
+
+
     // Si el usuario es nuevo, inicializar el formulario en `step: 1`
     if (!userData) {
         await saveUserResponse(chatId, { step: 1 });
