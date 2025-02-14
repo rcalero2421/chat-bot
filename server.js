@@ -54,7 +54,11 @@ app.get('/invitados', async (req, res) => {
 
 
 app.get('/qr', async (req, res) => {
-    const qrCode = getQrCode(); // Obtenemos el último QR generado
+    if (isBotLinked()) {
+        return res.status(200).json({ message: "✅ Ya hay un dispositivo vinculado." });
+    }
+
+    const qrCode = getQrCode();
     if (!qrCode) {
         return res.status(404).send("⚠️ QR no disponible. Intenta reiniciar el bot.");
     }
@@ -62,7 +66,7 @@ app.get('/qr', async (req, res) => {
     const qrImage = qr.image(qrCode, { type: 'png' });
     res.type('png');
     qrImage.pipe(res);
-})
+});
 
 // Init bot
 initializeBot();

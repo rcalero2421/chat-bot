@@ -7,26 +7,35 @@ const { getUserResponse, saveUserResponse } = require('./database/database');
 const moment = require('moment');
 
 let qrCodeData = null; 
+let isDeviceLinked = false; 
 
 const client = new Client({
     authStrategy: new LocalAuth(),
     puppeteer: {
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        headless: true // Para ejecutar sin interfaz gráfica
+        headless: true
     }
 });
 
 
 const initializeBot = () => {
     client.on('qr', qr => {
-        qrCodeData = qr; // Guarda el código QR
-        console.log('Escanea este QR en WhatsApp Web:');
-        qrcode.generate(qr, { small: true });
+        if (!isDeviceLinked) {
+            qrCodeData = qr;
+            console.log('Escanea este QR en WhatsApp Web:');
+            qrcode.generate(qr, { small: true });
+        }
     });
 
     client.on('ready', () => {
         console.log('¡Bot de WhatsApp listo!');
-        scheduleReminder(client); 
+        isDeviceLinked = true; // ✅ Marcar como vinculado
+        scheduleReminder(client);
+    });
+
+    client.on('disconnected', () => {
+        console.log('❌ Dispositivo desconectado. Generando nuevo QR...');
+        isDeviceLinked = false;
     });
 
     client.on('message', async msg => {
@@ -107,5 +116,6 @@ const initializeBot = () => {
 
 
 const getQrCode = () => qrCodeData;
+const isBotLinked = () => isDeviceLinked;
 
-module.exports = { initializeBot, getQrCode };
+module.exports = { initializeBot, getQrCode, isBotLinked };
