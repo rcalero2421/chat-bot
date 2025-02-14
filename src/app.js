@@ -51,7 +51,7 @@ const initializeBot = () => {
             timestamp: now.toISOString() 
         });
 
-        console.log(`🟢 Usuario ${chatId} en paso: ${userData?.step || 'Nuevo usuario'}`);
+        console.log(`🟢 Usuario nuevo ${chatId}`);
         
         const userData = await getUserResponse(chatId);
 
